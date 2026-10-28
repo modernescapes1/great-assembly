@@ -240,9 +240,8 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
         <button class="send" type="submit">Send</button>
       </form>
       <div class="why" id="done" hidden>
-        <p class="line" id="done-1">Thank you. Your request is in.</p>
-        <p class="line" id="done-2">We read every one ourselves, and if it feels right, Meir or Alter will reach out to you personally.</p>
-        <p class="line" id="done-3">Until then, keep building.</p>
+        <p class="line" id="done-1">Thanks. Whoever sent you here has good taste.</p>
+        <p class="line" id="done-2">We'll be in touch soon.</p>
       </div>
     </div>
   </section>
@@ -342,8 +341,8 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     form.hidden = true;
     var first = document.getElementById('f-name').value.trim().split(/\s+/)[0];
     var l1 = document.getElementById('done-1');
-    if(first){ l1.textContent = 'Thank you, ' + first + '. Your request is in.'; }
-    var lines = ['done-1','done-2','done-3'].map(function(id){ var el = document.getElementById(id); el.dataset.text = el.textContent; return el; });
+    if(first){ l1.textContent = 'Thanks, ' + first + '. Whoever sent you here has good taste.'; }
+    var lines = ['done-1','done-2'].map(function(id){ var el = document.getElementById(id); el.dataset.text = el.textContent; return el; });
     var head = document.querySelector('#apply .col > .line'); if(head) head.hidden = true;
     document.getElementById('done').hidden = false;
     if(!reduce){
