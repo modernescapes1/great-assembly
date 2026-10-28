@@ -26,6 +26,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{height:100%}
+body{margin:0}
 body{background:var(--paper);color:var(--ink);font-family:var(--type);-webkit-font-smoothing:antialiased;overflow:hidden}
 a{color:inherit}
 :focus-visible{outline:1px dashed var(--ribbon);outline-offset:4px}
@@ -40,6 +41,9 @@ a{color:inherit}
   padding-top:calc(18px + env(safe-area-inset-top,0px));padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));
   font-size:.78rem;letter-spacing:.06em;pointer-events:none}
 .head > *{pointer-events:auto}
+.head{transition:opacity .5s ease}
+body.on-home .head{opacity:0;pointer-events:none}
+body.on-home .head > *{pointer-events:none}
 .head a{text-decoration:none}
 .head .req{border-bottom:1px solid currentColor;padding-bottom:2px}
 .folio{position:fixed;z-index:5;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));font-size:.78rem;color:var(--ribbon);letter-spacing:.08em;font-variant-numeric:tabular-nums}
@@ -250,6 +254,9 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
 
 <script>
 (function(){
+  // Google Sheet web app address (Apps Script deployment). Leave empty to skip saving.
+  var SHEET_URL = '';
+  document.body.classList.add('on-home');
   var snap = document.getElementById('snap');
   var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
   var pg = document.getElementById('pg'); document.getElementById('of').textContent = pages.length;
@@ -306,6 +313,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     entries.forEach(function(e){
       if(!e.isIntersecting) return;
       pg.textContent = pages.indexOf(e.target) + 1;
+      document.body.classList.toggle('on-home', e.target.id === 'home');
       e.target.classList.add('seen');
       typePage(e.target);
     });
@@ -338,6 +346,9 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
              document.getElementById('f-build').value.trim();
     document.getElementById('f-err').hidden = !!ok;
     if(!ok) return;
+    if(SHEET_URL){
+      try{ fetch(SHEET_URL, { method:'POST', mode:'no-cors', body:new URLSearchParams(new FormData(form)) }).catch(function(){}); }catch(err){}
+    }
     form.hidden = true;
     var first = document.getElementById('f-name').value.trim().split(/\s+/)[0];
     var l1 = document.getElementById('done-1');
