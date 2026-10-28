@@ -24,6 +24,7 @@
   --serif:"EB Garamond",Garamond,Georgia,serif;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{height:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--type);-webkit-font-smoothing:antialiased;overflow:hidden}
 a{color:inherit}
@@ -75,7 +76,7 @@ a{color:inherit}
 .p-surf .photo{background-image:url(tub2.jpg);background-position:center 24%;--shade:rgba(8,9,12,.68)}
 .p-aurora .photo{background-image:url(aurora.jpg);background-position:center 40%;--shade:rgba(8,9,12,.72)}
 .p-fire .photo{background-image:url(fire.jpg);background-position:center 55%;--shade:rgba(8,9,12,.74)}
-.p-aurora .sched li,.p-aurora .sched li span{text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.p-aurora .sched li,.p-aurora .sched li .desc{text-shadow:0 1px 14px rgba(0,0,0,.6)}
 
 /* Night ski: words up in the stars */
 .p-ski{justify-content:flex-start;padding-top:clamp(110px,18vh,180px)}
@@ -88,8 +89,8 @@ a{color:inherit}
 .sched li em{font-style:normal;color:var(--ribbon);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase}
 .sched li div{display:flex;flex-direction:column;gap:2px;min-width:0}
 .sched li b{font-weight:700;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.35}
-.sched li span{font-family:var(--serif);font-style:italic;color:var(--faint);font-size:clamp(.98rem,1.6vw,1.08rem);line-height:1.4}
-@media (max-height:700px){.sched li span{display:none}}
+.sched li .desc{font-family:var(--serif);font-style:italic;color:var(--faint);font-size:clamp(.98rem,1.6vw,1.08rem);line-height:1.4}
+@media (max-height:760px){.sched li .desc{display:none}}
 .note{display:block;margin-top:18px;font-family:var(--serif);font-style:italic;color:var(--faint);font-size:1rem}
 
 /* Why */
@@ -108,8 +109,8 @@ a{color:inherit}
 
 /* Form */
 form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
-.f{display:grid;grid-template-columns:8.5em minmax(0,1fr);align-items:end;gap:10px;font-size:1rem}
-.f label{color:var(--faint);padding-bottom:6px}
+.f{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;font-size:1rem}
+.f label{color:var(--faint);font-size:.88rem}
 .f input,.f textarea{font:inherit;font-size:1.02rem;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:4px 0 6px;min-width:0}
 .f textarea{resize:none;height:3.6em}
 .f input:focus,.f textarea:focus{outline:none;border-bottom-color:var(--ribbon)}
@@ -126,11 +127,17 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
 @media (max-width:600px){
   .hosts{grid-template-columns:minmax(0,1fr);gap:18px;margin-top:22px}
   .face{width:88px;height:88px}
-  .f{grid-template-columns:minmax(0,1fr);gap:2px}
-  .f label{padding-bottom:0;font-size:.85rem}
   .sched li{grid-template-columns:minmax(0,1fr);gap:2px}
   .head .req{display:none}
   .p-pipe .photo{background-size:cover;background-position:62% 20%;--shade:rgba(8,9,12,.7)}
+}
+@media (max-height:760px){
+  #apply .label{margin-bottom:10px}
+  form{gap:8px;margin-top:14px}
+  .f label{font-size:.8rem}
+  .f input,.f textarea{padding:2px 0 4px}
+  .f textarea{height:2.6em}
+  .send{margin-top:4px;padding:12px 22px}
 }
 @media (prefers-reduced-motion:reduce){
   .caret{animation:none}
@@ -190,11 +197,11 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
       <span class="label">The plan</span>
       <p class="line" data-type>Four days. Iceland in January.</p>
       <ol class="sched">
-        <li><em>Day 1</em><div><b data-type>Forge your own Viking knife.</b><span>Land in the morning, then hammer steel with a real blacksmith.</span></div></li>
-        <li><em>Day 2</em><div><b data-type>Go underground.</b><span>Walk deep inside a lava tube the volcano left behind.</span></div></li>
-        <li><em>Day 3</em><div><b data-type>Climb a wall of ice.</b><span>Crampons, axes, and a frozen glacier face.</span></div></li>
-        <li><em>Day 4</em><div><b data-type>Inside the Katla ice cave.</b><span>Blue ice under a volcano, Skógafoss on the way out, home before Shabbos.</span></div></li>
-        <li><em>Every night</em><div><b data-type>Chase the northern lights.</b><span>Long table, kosher dinner, then everybody outside.</span></div></li>
+        <li><em>Day 1</em><div><b data-type>Forge your own Viking knife.</b><span class="desc">Land in the morning, then hammer steel with a real blacksmith.</span></div></li>
+        <li><em>Day 2</em><div><b data-type>Go underground.</b><span class="desc">Walk deep inside a lava tube the volcano left behind.</span></div></li>
+        <li><em>Day 3</em><div><b data-type>Climb a wall of ice.</b><span class="desc">Crampons, axes, and a frozen glacier face.</span></div></li>
+        <li><em>Day 4</em><div><b data-type>Inside the Katla ice cave.</b><span class="desc">Blue ice under a volcano, Skógafoss on the way out, home before Shabbos.</span></div></li>
+        <li><em>Every night</em><div><b data-type>Chase the northern lights.</b><span class="desc">Long table, kosher dinner, then everybody outside.</span></div></li>
       </ol>
     </div>
   </section>
@@ -227,12 +234,16 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
         <div class="f"><label for="f-name">Name</label><input id="f-name" name="fullname" autocomplete="name"></div>
         <div class="f"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
         <div class="f"><label for="f-phone">WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
-        <div class="f"><label for="f-ref">Sent by</label><input id="f-ref" name="referrer"></div>
-        <div class="f"><label for="f-build">Building</label><textarea id="f-build" name="building"></textarea></div>
+        <div class="f"><label for="f-ref">Referred by</label><input id="f-ref" name="referrer"></div>
+        <div class="f"><label for="f-build">What I'm currently building</label><textarea id="f-build" name="building"></textarea></div>
         <p class="err" id="f-err" hidden>Just need your name, a real email, and what you're building.</p>
         <button class="send" type="submit">Send</button>
       </form>
-      <p class="line" id="done" hidden>Got it. If it's a fit, you'll hear from one of us.</p>
+      <div class="why" id="done" hidden>
+        <p class="line" id="done-1">Thank you. Your request is in.</p>
+        <p class="line" id="done-2">We read every one ourselves, and if it feels right, Meir or Alter will reach out to you personally.</p>
+        <p class="line" id="done-3">Until then, keep building.</p>
+      </div>
     </div>
   </section>
 
@@ -329,9 +340,16 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     document.getElementById('f-err').hidden = !!ok;
     if(!ok) return;
     form.hidden = true;
-    var done = document.getElementById('done'); done.hidden = false;
-    done.dataset.text = done.textContent;
-    if(!reduce) typeEl(done, function(){});
+    var first = document.getElementById('f-name').value.trim().split(/\s+/)[0];
+    var l1 = document.getElementById('done-1');
+    if(first){ l1.textContent = 'Thank you, ' + first + '. Your request is in.'; }
+    var lines = ['done-1','done-2','done-3'].map(function(id){ var el = document.getElementById(id); el.dataset.text = el.textContent; return el; });
+    var head = document.querySelector('#apply .col > .line'); if(head) head.hidden = true;
+    document.getElementById('done').hidden = false;
+    if(!reduce){
+      lines.forEach(function(el){ build(el); el._on.textContent = ''; el._off.textContent = el.dataset.text; });
+      (function next(k){ if(k < lines.length) typeEl(lines[k], function(){ setTimeout(function(){ next(k+1); }, 300); }); })(0);
+    }
   });
 })();
 </script>
