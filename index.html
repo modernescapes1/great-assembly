@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="By invitation. Men of the Great Assembly, Winter 2027, Reykjavík.">
+<meta property="og:title" content="Men of the Great Assembly">
+<meta property="og:image" content="home.jpg">
+<title>Men of the Great Assembly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital@0;1&display=swap">
+<style>
+/* Layout: a typed letter after dark. Full-bleed photographs edge to edge, one line of white typewriter text per page, each page snaps in and types itself out. Red ribbon only for the cursor and page numbers. */
+:root{
+  color-scheme: dark;
+  --paper:#0B0C10;
+  --paper-2:#16181F;
+  --ink:#F4F1EA;
+  --faint:#B3B0A8;
+  --ribbon:#E0644C;
+  --line:rgba(244,241,234,.22);
+  --type:"Courier Prime","Courier New",Courier,monospace;
+  --serif:"EB Garamond",Garamond,Georgia,serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--type);-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:inherit}
+:focus-visible{outline:1px dashed var(--ribbon);outline-offset:4px}
+
+.snap{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;overscroll-behavior:contain}
+.page{position:relative;height:100%;min-height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:left;
+  padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));padding-block:72px 64px;overflow:hidden}
+.col{width:100%;max-width:640px;min-width:0}
+
+/* Fixed letterhead */
+.head{position:fixed;inset:0 0 auto;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding-top:calc(18px + env(safe-area-inset-top,0px));padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));
+  font-size:.78rem;letter-spacing:.06em;pointer-events:none}
+.head > *{pointer-events:auto}
+.head a{text-decoration:none}
+.head .req{border-bottom:1px solid currentColor;padding-bottom:2px}
+.folio{position:fixed;z-index:5;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));font-size:.78rem;color:var(--ribbon);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+
+/* Type */
+.label{display:block;font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--faint);margin-bottom:22px}
+.line{font-size:clamp(1.25rem,2.6vw,1.75rem);line-height:1.55;margin:0;text-wrap:pretty}
+.small{font-size:clamp(1rem,1.8vw,1.15rem);line-height:1.7}
+.caret{display:inline-block;width:.55em;height:1.05em;background:var(--ribbon);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+[data-type].typing{white-space:pre-wrap}
+
+/* Full-bleed photos */
+.photo{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;z-index:0;transform:scale(1.03);transition:transform 9s ease-out}
+.photo::after{content:"";position:absolute;inset:0;background:var(--shade,rgba(8,9,12,.45))}
+.page.seen .photo{transform:scale(1.1)}
+.page > .col,.page > .cap{position:relative;z-index:1}
+.page .line,.page .label,.page .cap{text-shadow:0 1px 18px rgba(0,0,0,.55)}
+
+/* Home */
+.home{padding:0}
+.home .photo{background-image:url(home.jpg);background-position:center;filter:blur(40px) brightness(.55);transform:scale(1.2)!important;transition:none;--shade:rgba(8,9,12,.2)}
+.home .poster{position:relative;z-index:1;display:block;width:min(100vw,100dvh);height:min(100vw,100dvh);max-width:100%;object-fit:contain;animation:settle 1.4s cubic-bezier(.2,.75,.2,1) both}
+@keyframes settle{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.home .title{font-size:clamp(1.1rem,2.4vw,1.6rem);letter-spacing:.2em;text-transform:uppercase;margin:0}
+.home .sub{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--faint);margin:4px 0 0}
+
+/* Pipe portrait: subject sits right, words sit left */
+.p-pipe .photo{background-image:url(pipe.jpg);background-position:center 30%;background-size:cover;background-color:#2A2724;--shade:rgba(8,9,12,.7)}
+
+
+/* Darkened full-bleed backgrounds */
+.p-surf .photo{background-image:url(surf.jpg);background-position:62% center;--shade:rgba(8,9,12,.66)}
+.p-aurora .photo{background-image:url(aurora.jpg);background-position:center 40%;--shade:rgba(8,9,12,.72)}
+.p-fire .photo{background-image:url(fire.jpg);background-position:center 55%;--shade:rgba(8,9,12,.74)}
+.p-aurora .sched li,.p-aurora .sched li span{text-shadow:0 1px 14px rgba(0,0,0,.6)}
+
+/* Night ski: words up in the stars */
+.p-ski{justify-content:flex-start;padding-top:clamp(110px,18vh,180px)}
+.p-ski .photo{background-image:url(ski.jpg);background-position:center 62%;--shade:linear-gradient(180deg,rgba(8,9,12,.8) 0%,rgba(8,9,12,.5) 45%,rgba(8,9,12,.4) 100%)}
+.hint{position:absolute;bottom:calc(46px + env(safe-area-inset-bottom,0px));font-size:.72rem;color:var(--faint);letter-spacing:.1em}
+
+/* Schedule */
+.sched{list-style:none;margin:clamp(18px,3.5vh,32px) auto 0;padding:0;text-align:left;display:grid;gap:clamp(8px,1.6vh,14px);max-width:600px}
+.sched li{display:grid;grid-template-columns:7.2em minmax(0,1fr);gap:14px;align-items:baseline;border-bottom:1px dotted var(--line);padding-bottom:clamp(8px,1.6vh,14px)}
+.sched li em{font-style:normal;color:var(--ribbon);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase}
+.sched li div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.sched li b{font-weight:700;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.35}
+.sched li span{font-family:var(--serif);font-style:italic;color:var(--faint);font-size:clamp(.98rem,1.6vw,1.08rem);line-height:1.4}
+@media (max-height:700px){.sched li span{display:none}}
+.note{display:block;margin-top:18px;font-family:var(--serif);font-style:italic;color:var(--faint);font-size:1rem}
+
+/* Why */
+.why{display:grid;gap:14px}
+
+/* Hosts */
+.hosts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:32px;text-align:left}
+.host{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0}
+.face{position:relative;width:124px;height:124px;border-radius:50%;background:var(--paper-2);border:1px solid var(--line);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.face input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;z-index:2}
+.face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.face.flip img{transform:scaleX(-1)}
+.face span{position:absolute;inset:0;display:grid;place-items:center;font-size:.66rem;color:var(--faint)}
+.host b{font-size:1.08rem}
+.host i{font-family:var(--serif);font-size:1.02rem;color:var(--faint)}
+
+/* Form */
+form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
+.f{display:grid;grid-template-columns:8.5em minmax(0,1fr);align-items:end;gap:10px;font-size:1rem}
+.f label{color:var(--faint);padding-bottom:6px}
+.f input,.f textarea{font:inherit;font-size:1.02rem;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:4px 0 6px;min-width:0}
+.f textarea{resize:none;height:3.6em}
+.f input:focus,.f textarea:focus{outline:none;border-bottom-color:var(--ribbon)}
+.err{margin:0;color:var(--ribbon);font-size:.92rem}
+.send{justify-self:center;margin-top:10px;font:inherit;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:var(--ink);border:0;padding:15px 26px;cursor:pointer;transition:background .3s}
+.send:hover,.send:focus-visible{background:var(--ribbon)}
+
+@media (max-width:600px){
+  .hosts{grid-template-columns:minmax(0,1fr);gap:18px;margin-top:22px}
+  .face{width:88px;height:88px}
+  .f{grid-template-columns:minmax(0,1fr);gap:2px}
+  .f label{padding-bottom:0;font-size:.85rem}
+  .sched li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .head .req{display:none}
+  .p-pipe .photo{background-size:cover;background-position:62% 20%;--shade:rgba(8,9,12,.7)}
+}
+@media (prefers-reduced-motion:reduce){
+  .caret{animation:none}
+  .snap{scroll-behavior:auto}
+  .photo,.page.seen .photo{transition:none;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <a href="#home" id="to-top">Men of the Great Assembly</a>
+  <a class="req" href="#apply">Request an invitation</a>
+</header>
+<div class="folio" aria-hidden="true">p. <span id="pg">1</span> of <span id="of">8</span></div>
+
+<main class="snap" id="snap">
+
+  <section class="page home" id="home">
+    <div class="photo" aria-hidden="true"></div>
+    <video class="poster" src="home.mp4" poster="home.jpg" autoplay muted loop playsinline disablepictureinpicture aria-label="Men of the Great Assembly, Winter 2027 Summit, Reykjavík, Iceland. Animated painting of young builders and elders in shtreimels around one long table in a mountain lodge."></video>
+  </section>
+
+  <section class="page p-pipe">
+    <div class="photo" role="img" aria-label="Black and white portrait of a bearded man in a straw hat and sunglasses, smoking a pipe"></div>
+    <div class="col">
+      <p class="line" data-type>If someone sent you here, it's because they think you're one of us.</p>
+    </div>
+  </section>
+
+  <section class="page p-ski">
+    <div class="photo" role="img" aria-label="A lone skier with a headlamp below a snowy peak under the Milky Way"></div>
+    <div class="col">
+      <span class="label">Who we are</span>
+      <div class="why">
+        <p class="line" data-type>We're a small brotherhood of Jewish guys building things that matter, and looking out for each other along the way.</p>
+        <p class="line" data-type>Every few months we take it somewhere wild, from chasing the northern lights in Iceland to diving with bull sharks in Fiji.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page p-surf">
+    <div class="photo" role="img" aria-label="Two surfers carrying boards down the beach at sunset"></div>
+    <div class="col">
+      <span class="label">Why come</span>
+      <div class="why">
+        <p class="line" data-type>Tackle your biggest life and business obstacles with people who get it.</p>
+        <p class="line" data-type>Do something crazy you'd never do on your own.</p>
+        <p class="line" data-type>Leave with friends for life who actually pick up the phone.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page p-aurora">
+    <div class="photo" role="img" aria-label="Northern lights over snowy rocks on the Icelandic coast"></div>
+    <div class="col">
+      <span class="label">The plan</span>
+      <p class="line" data-type>Four days. Iceland in January.</p>
+      <ol class="sched">
+        <li><em>Day 1</em><div><b data-type>Forge your own Viking knife.</b><span>Land in the morning, then hammer steel with a real blacksmith.</span></div></li>
+        <li><em>Day 2</em><div><b data-type>Go underground.</b><span>Walk deep inside a lava tube the volcano left behind.</span></div></li>
+        <li><em>Day 3</em><div><b data-type>Climb a wall of ice.</b><span>Crampons, axes, and a frozen glacier face.</span></div></li>
+        <li><em>Day 4</em><div><b data-type>Inside the Katla ice cave.</b><span>Blue ice under a volcano, Skógafoss on the way out, home before Shabbos.</span></div></li>
+        <li><em>Every night</em><div><b data-type>Chase the northern lights.</b><span>Long table, kosher dinner, then everybody outside.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="page p-fire">
+    <div class="photo" role="img" aria-label="A crowd gathered around a bonfire at night at Sababa Fest"></div>
+    <div class="col">
+      <span class="label">Your hosts</span>
+      <p class="line" data-type>Two friends who like bringing the right people together.</p>
+      <div class="hosts">
+        <div class="host">
+          <span class="face flip"><img src="meir.jpg" alt="Meir Shemtov"></span>
+          <b>Meir Shemtov</b>
+          <i>Cofounder, Modern Escapes</i>
+        </div>
+        <div class="host">
+          <span class="face flip"><img src="alter.jpg" alt="Alter Deitsch"></span>
+          <b>Alter Deitsch</b>
+          <i>Cofounder, Sababa Fest</i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="apply">
+    <div class="col">
+      <span class="label">Twenty seats</span>
+      <p class="line" data-type>Request an invitation.</p>
+      <form id="apply-form" novalidate>
+        <div class="f"><label for="f-name">Name</label><input id="f-name" name="fullname" autocomplete="name"></div>
+        <div class="f"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="f"><label for="f-phone">WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="f"><label for="f-ref">Sent by</label><input id="f-ref" name="referrer"></div>
+        <div class="f"><label for="f-build">Building</label><textarea id="f-build" name="building"></textarea></div>
+        <p class="err" id="f-err" hidden>Just need your name, a real email, and what you're building.</p>
+        <button class="send" type="submit">Send</button>
+      </form>
+      <p class="line" id="done" hidden>Got it. If it's a fit, you'll hear from one of us.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var snap = document.getElementById('snap');
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var pg = document.getElementById('pg'); document.getElementById('of').textContent = pages.length;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function placeCaret(el){
+    document.querySelectorAll('.caret').forEach(function(c){ c.remove(); });
+    var c = document.createElement('span'); c.className = 'caret'; c.setAttribute('aria-hidden','true');
+    el.appendChild(c);
+  }
+
+  // Store each line's text up front so it stays readable if script never types it
+  document.querySelectorAll('[data-type]').forEach(function(el){ el.dataset.text = el.textContent; el.setAttribute('aria-label', el.textContent); });
+
+  function typeEl(el, done){
+    var text = el.dataset.text, i = 0;
+    el.classList.add('typing'); el.textContent = '';
+    var node = document.createTextNode('');
+    el.appendChild(node); placeCaret(el);
+    (function tick(){
+      if(i >= text.length){ node.data = text; done(); return; }
+      node.data += text.charAt(i);
+      var ch = text.charAt(i); i++;
+      var d = 22 + Math.random() * 38;
+      if(ch === ',' ) d += 120;
+      if(ch === '.' ) d += 260;
+      setTimeout(tick, d);
+    })();
+  }
+  function typePage(page){
+    if(page.dataset.typed) return; page.dataset.typed = '1';
+    var els = Array.prototype.slice.call(page.querySelectorAll('[data-type]'));
+    if(reduce || !els.length){ return; }
+    // blank the lines that haven't been typed yet, so they don't flash
+    els.forEach(function(el){ el.textContent = ' '; });
+    (function next(k){
+      if(k >= els.length){ return; }
+      typeEl(els[k], function(){ setTimeout(function(){ next(k+1); }, 260); });
+    })(0);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      pg.textContent = pages.indexOf(e.target) + 1;
+      e.target.classList.add('seen');
+      typePage(e.target);
+    });
+  }, { root: snap, threshold: 0.6 });
+  pages.forEach(function(p){ io.observe(p); });
+
+  document.getElementById('to-top').addEventListener('click', function(e){ e.preventDefault(); snap.scrollTo({ top: 0, behavior: 'smooth' }); });
+  document.querySelectorAll('a[href="#apply"]').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); document.getElementById('apply').scrollIntoView({ behavior: 'smooth' }); });
+  });
+
+  document.querySelectorAll('.face input').forEach(function(input){
+    input.addEventListener('change', function(){
+      var f = input.files && input.files[0]; if(!f) return;
+      var r = new FileReader();
+      r.onload = function(){
+        var face = input.parentElement, img = face.querySelector('img');
+        if(!img){ img = document.createElement('img'); img.alt = ''; face.insertBefore(img, face.firstChild); }
+        img.src = r.result; var s = face.querySelector('span'); if(s) s.hidden = true;
+      };
+      r.readAsDataURL(f);
+    });
+  });
+
+  var form = document.getElementById('apply-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = document.getElementById('f-name').value.trim() &&
+             /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('f-email').value.trim()) &&
+             document.getElementById('f-build').value.trim();
+    document.getElementById('f-err').hidden = !!ok;
+    if(!ok) return;
+    form.hidden = true;
+    var done = document.getElementById('done'); done.hidden = false;
+    done.dataset.text = done.textContent;
+    if(!reduce) typeEl(done, function(){});
+  });
+})();
+</script>
+
+</body>
+</html>
