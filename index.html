@@ -82,6 +82,10 @@ body.on-home .head > *{pointer-events:none}
 .p-fire .photo{background-image:url(fire.jpg);background-position:center 55%;--shade:rgba(8,9,12,.74)}
 .p-aurora .sched li,.p-aurora .sched li .desc{text-shadow:0 1px 14px rgba(0,0,0,.6)}
 
+/* Crew video: full-bleed, darkened */
+.bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.p-crew .photo{background:none;transform:none!important;--shade:rgba(8,9,12,.68)}
+
 /* Night ski: words up in the stars */
 .p-ski{justify-content:flex-start;padding-top:clamp(110px,18vh,180px)}
 .p-ski .photo{background-image:url(ski.jpg);background-position:center 62%;--shade:linear-gradient(180deg,rgba(8,9,12,.8) 0%,rgba(8,9,12,.5) 45%,rgba(8,9,12,.4) 100%)}
@@ -176,14 +180,19 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     </div>
   </section>
 
+  <section class="page p-crew">
+    <video class="bgvid" src="crew.mp4" poster="crew.jpg" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-hidden="true"></video>
+    <div class="photo" aria-hidden="true"></div>
+    <div class="col">
+      <span class="label">Who we are</span>
+      <p class="line" data-type>We're a small brotherhood of Jewish guys building things that matter, and looking out for each other along the way.</p>
+    </div>
+  </section>
+
   <section class="page p-ski">
     <div class="photo" role="img" aria-label="A lone skier with a headlamp below a snowy peak under the Milky Way"></div>
     <div class="col">
-      <span class="label">Who we are</span>
-      <div class="why">
-        <p class="line" data-type>We're a small brotherhood of Jewish guys building things that matter, and looking out for each other along the way.</p>
-        <p class="line" data-type>Every few months we take it somewhere wild, from chasing the northern lights in Iceland to diving with bull sharks in Fiji.</p>
-      </div>
+      <p class="line" data-type>Every few months we take it somewhere wild, from chasing the northern lights in Iceland to diving with bull sharks in Fiji.</p>
     </div>
   </section>
 
