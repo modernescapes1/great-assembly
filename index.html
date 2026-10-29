@@ -58,9 +58,9 @@ body.on-home .head > *{pointer-events:none}
 @keyframes blink{50%{opacity:0}}
 
 /* Full-bleed photos */
-.photo{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;z-index:0;transform:scale(1.03);transition:transform 9s ease-out}
+.photo{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;z-index:0;transform:scale(1.04);animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.16) translate(-1.5%,-1%)}}
 .photo::after{content:"";position:absolute;inset:0;background:var(--shade,rgba(8,9,12,.45))}
-.page.seen .photo{transform:scale(1.1)}
 .page > .col,.page > .cap{position:relative;z-index:1}
 .page .line,.page .label,.page .cap{text-shadow:0 1px 18px rgba(0,0,0,.55)}
 
@@ -151,7 +151,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
 @media (prefers-reduced-motion:reduce){
   .caret{animation:none}
   .snap{scroll-behavior:auto}
-  .photo,.page.seen .photo{transition:none;transform:none}
+  .photo{animation:none!important;transform:none}
 }
 </style>
 </head>
@@ -182,7 +182,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
   </section>
 
   <section class="page p-crew">
-    <video class="bgvid" src="crew.mp4" poster="crew.jpg" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-hidden="true"></video>
+    <video class="bgvid" src="crew2.mp4" poster="crew2.jpg" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-hidden="true"></video>
     <div class="photo" aria-hidden="true"></div>
     <div class="col">
       <span class="label">Who we are</span>
@@ -219,7 +219,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     <div class="photo" role="img" aria-label="Northern lights over snowy rocks on the Icelandic coast"></div>
     <div class="col">
       <span class="label">The plan</span>
-      <p class="line" data-type>Four days. Iceland in January.</p>
+      <p class="line" data-type>Iceland Summit: January 18–⁠21</p>
       <ol class="sched">
         <li><em>Day 1</em><div><b data-type>Forge your own Viking knife.</b><span class="desc">Land in the morning, then hammer steel with a real blacksmith.</span></div></li>
         <li><em>Day 2</em><div><b data-type>Go underground.</b><span class="desc">Walk deep inside a lava tube the volcano left behind.</span></div></li>
