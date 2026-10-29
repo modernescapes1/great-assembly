@@ -77,7 +77,8 @@ body.on-home .head > *{pointer-events:none}
 
 
 /* Darkened full-bleed backgrounds */
-.p-surf .photo{background-image:url(tub2.jpg);background-position:center 24%;--shade:rgba(8,9,12,.68)}
+.p-surf .photo{background:none;transform:none!important;--shade:rgba(8,9,12,.66)}
+.p-surf .bgvid{object-position:center 24%}
 .p-aurora .photo{background-image:url(aurora.jpg);background-position:center 40%;--shade:rgba(8,9,12,.72)}
 .p-fire .photo{background-image:url(fire.jpg);background-position:center 55%;--shade:rgba(8,9,12,.74)}
 .p-aurora .sched li,.p-aurora .sched li .desc{text-shadow:0 1px 14px rgba(0,0,0,.6)}
@@ -87,7 +88,7 @@ body.on-home .head > *{pointer-events:none}
 .p-crew .photo{background:none;transform:none!important;--shade:rgba(8,9,12,.68)}
 
 /* Night ski: words up in the stars */
-.p-ski{justify-content:flex-start;padding-top:clamp(110px,18vh,180px)}
+.p-ski{}
 .p-ski .photo{background-image:url(ski.jpg);background-position:center 62%;--shade:linear-gradient(180deg,rgba(8,9,12,.8) 0%,rgba(8,9,12,.5) 45%,rgba(8,9,12,.4) 100%)}
 .hint{position:absolute;bottom:calc(46px + env(safe-area-inset-bottom,0px));font-size:.72rem;color:var(--faint);letter-spacing:.1em}
 
@@ -128,7 +129,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
 
 @media (max-aspect-ratio: 4/5){
   .home .poster{width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
-  .p-surf .photo{background-image:url(tub2-tall.jpg);background-position:center}
+  .p-surf .bgvid{object-position:center}
   .p-surf{justify-content:flex-end;padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
   .p-surf .photo{--shade:linear-gradient(180deg,rgba(8,9,12,.55) 0%,rgba(8,9,12,.35) 40%,rgba(8,9,12,.6) 60%,rgba(8,9,12,.9) 100%)}
 }
@@ -185,19 +186,25 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     <div class="photo" aria-hidden="true"></div>
     <div class="col">
       <span class="label">Who we are</span>
-      <p class="line" data-type>We're a small brotherhood of Jewish guys building things that matter, and looking out for each other along the way.</p>
+      <p class="line" data-type>We're a small brotherhood of Jewish men building things that matter, and looking out for each other along the way.</p>
     </div>
   </section>
 
   <section class="page p-ski">
     <div class="photo" role="img" aria-label="A lone skier with a headlamp below a snowy peak under the Milky Way"></div>
     <div class="col">
+      <span class="label">What we do</span>
       <p class="line" data-type>Every few months we take it somewhere wild, from chasing the northern lights in Iceland to diving with bull sharks in Fiji.</p>
     </div>
   </section>
 
   <section class="page p-surf">
-    <div class="photo" role="img" aria-label="Two men talking in a steaming hot tub on a snowy night"></div>
+    <video class="bgvid" id="tubvid" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-label="Two men talking in a steaming hot tub on a snowy night"></video>
+    <script>
+      (function(){var v=document.getElementById('tubvid');var tall=window.matchMedia('(max-aspect-ratio: 4/5)').matches;
+      v.poster=tall?'tubv-tall.jpg':'tubv.jpg';v.src=tall?'tubv-tall.mp4':'tubv.mp4';})();
+    </script>
+    <div class="photo" aria-hidden="true"></div>
     <div class="col">
       <span class="label">Why come</span>
       <div class="why">
