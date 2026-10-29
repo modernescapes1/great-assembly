@@ -123,6 +123,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
 .f input,.f textarea{font:inherit;font-size:1.02rem;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:4px 0 6px;min-width:0}
 .f textarea{resize:none;height:3.6em}
 .f input:focus,.f textarea:focus{outline:none;border-bottom-color:var(--ribbon)}
+.mark-logo{display:block;width:clamp(150px,22vw,220px);height:auto;margin:0 auto clamp(18px,3.5vh,36px);opacity:.92}
 .err{margin:0;color:var(--ribbon);font-size:.92rem}
 .send{justify-self:center;margin-top:10px;font:inherit;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:var(--ink);border:0;padding:15px 26px;cursor:pointer;transition:background .3s}
 .send:hover,.send:focus-visible{background:var(--ribbon)}
@@ -142,6 +143,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
 }
 @media (max-height:760px){
   #apply .label{margin-bottom:10px}
+  .mark-logo{width:130px;margin-bottom:12px}
   form{gap:8px;margin-top:14px}
   .f label{font-size:.8rem}
   .f input,.f textarea{padding:2px 0 4px}
@@ -186,7 +188,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     <div class="photo" aria-hidden="true"></div>
     <div class="col">
       <span class="label">Who we are</span>
-      <p class="line" data-type>We're a small brotherhood of Jewish men building things that matter, and looking out for each other along the way.</p>
+      <p class="line" data-type>We're a small brotherhood of Jewish entrepreneurs building things that matter, and looking out for each other along the way.</p>
     </div>
   </section>
 
@@ -219,7 +221,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
     <div class="photo" role="img" aria-label="Northern lights over snowy rocks on the Icelandic coast"></div>
     <div class="col">
       <span class="label">The plan</span>
-      <p class="line" data-type>Iceland Summit: January 18–⁠21</p>
+      <p class="line" data-type>Iceland Summit: January 18–⁠21, 2027</p>
       <ol class="sched">
         <li><em>Day 1</em><div><b data-type>Forge your own Viking knife.</b><span class="desc">Land in the morning, then hammer steel with a real blacksmith.</span></div></li>
         <li><em>Day 2</em><div><b data-type>Go underground.</b><span class="desc">Walk deep inside a lava tube the volcano left behind.</span></div></li>
@@ -253,6 +255,7 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
 
   <section class="page" id="apply">
     <div class="col">
+      <img class="mark-logo" src="logo.png" alt="Men of the Great Assembly">
       <span class="label">Twenty seats</span>
       <p class="line" data-type>Request an invitation.</p>
       <form id="apply-form" novalidate>
