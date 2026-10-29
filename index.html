@@ -80,7 +80,7 @@ body.on-home .head > *{pointer-events:none}
 .p-surf .photo{background:none;transform:none!important;--shade:rgba(8,9,12,.66)}
 .p-surf .bgvid{object-position:center 24%}
 .p-aurora .photo{background-image:url(aurora.jpg);background-position:center 40%;--shade:rgba(8,9,12,.72)}
-.p-fire .photo{background-image:url(fire.jpg);background-position:center 55%;--shade:rgba(8,9,12,.74)}
+.p-fire .photo{background:none;transform:none!important;--shade:rgba(8,9,12,.7)}
 .p-aurora .sched li,.p-aurora .sched li .desc{text-shadow:0 1px 14px rgba(0,0,0,.6)}
 
 /* Crew video: full-bleed, darkened */
@@ -231,7 +231,8 @@ form{margin:30px auto 0;max-width:520px;display:grid;gap:16px;text-align:left}
   </section>
 
   <section class="page p-fire">
-    <div class="photo" role="img" aria-label="A crowd gathered around a bonfire at night at Sababa Fest"></div>
+    <video class="bgvid" src="crowd.mp4" poster="crowd.jpg" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-label="A crowd dancing at night at Sababa Fest"></video>
+    <div class="photo" aria-hidden="true"></div>
     <div class="col">
       <span class="label">Your hosts</span>
       <p class="line" data-type>Two friends who like bringing the right people together.</p>
